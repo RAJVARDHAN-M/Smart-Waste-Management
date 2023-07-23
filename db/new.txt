@@ -1,0 +1,50 @@
+CREATE TABLE producers (
+    company_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    producer_name CHAR(30),
+    producer_email VARCHAR(30),
+    producer_contact_number VARCHAR(13),
+    waste_type INT,
+    password CHAR(60)
+);
+
+CREATE TABLE recyclers (
+    company_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    recycler_name CHAR(30),
+    recycler_email VARCHAR(30),
+    recycler_contact_number VARCHAR(13),
+    waste_type INT,
+    password CHAR(60)
+);
+
+ALTER TABLE recyclers AUTO_INCREMENT = 20000;
+
+
+
+
+CREATE TABLE orders (
+    order_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    recycler_id INT,
+    producer_id INT,
+    waste_type INT,
+    waste_quantity VARCHAR(20),
+    pickup_date DATETIME,
+    order_status INT,
+    north_coordinate FLOAT,
+    east_coordinate FLOAT,
+    FOREIGN KEY (recycler_id) REFERENCES recyclers(company_id),
+    FOREIGN KEY (producer_id) REFERENCES producers(company_id)
+);
+
+
+CREATE TABLE addresses (
+    company_id INT NOT NULL PRIMARY KEY,
+    building_number VARCHAR(20),
+    building_name VARCHAR(20),
+    street_landmark VARCHAR(20),
+    city VARCHAR(20),
+    district VARCHAR(20),
+    pincode INT,
+    north_coordinate FLOAT,
+    east_coordinate FLOAT
+);
+
